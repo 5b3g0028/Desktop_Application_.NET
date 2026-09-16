@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace _2026_WpfApp1
 {
@@ -19,6 +20,14 @@ namespace _2026_WpfApp1
         public MainWindow()
         {
             InitializeComponent();
+            TextBlock textBlock = new TextBlock
+            {
+                Text = "Hello World",
+                FontSize = 32,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+             };
+            this.Content = textBlock;
         }
     }
 }
