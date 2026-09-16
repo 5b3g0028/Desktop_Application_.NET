@@ -51,5 +51,14 @@ namespace _2026_WpfApp1
                 ResultTextBox.Text = "輸入1~9之間的數字";
             }
         }
+
+        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
+        {
+            string userName = NameTextBox.Text;
+            string userPhone = PhoneTextBox.Text;
+
+            string message = $"\n姓名：{userName}\n電話：{userPhone}";
+            MessageBox.Show(message, "確認", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 }

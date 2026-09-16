@@ -7,41 +7,19 @@
         mc:Ignorable="d"
         Title="Awindow" Height="450" Width="800">
     <Grid Background="#FFFF9D9D">
-        <TextBlock x:Name="Title"
-                   Height="60"
-                   Margin="19,6,0,0"
-                   TextWrapping="Wrap"
-                   Text="乘法表演示"
-                   VerticalAlignment="Top"
-                   FontSize="48" Background="#FFFF9900" HorizontalAlignment="Left" Width="245"/>
-        <TextBox x:Name="InputTextBox"
-                 Margin="191,0,408,257"
-                 TextWrapping="Wrap"
-                 TextChanged="TextBox_TextChanged" Height="42" VerticalAlignment="Bottom"/>
-        <TextBox x:Name="ResultTextBox"
-                 TextWrapping="Wrap"
-                 AcceptsReturn="True"
-                 IsReadOnly="True"
-                 Margin="0,201,0,0"
-                 HorizontalAlignment="Center"
-                 Width="750" Background="#FFFFEFDE" Height="170" VerticalAlignment="Top"/>
-        <Button x:Name="RunBotton"
-                Content="執行"
-                Margin="0,0,178,254"
-                FontSize="18"
-                Click="RunBotton_Click" RenderTransformOrigin="0.482,0.54" Height="45" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="112"/>
-        <TextBox x:Name="InputTextBox複製__C_"
-            Margin="305,0,294,367"
-            TextWrapping="Wrap"
-            TextChanged="TextBox_TextChanged" Height="42" VerticalAlignment="Bottom"/>
-        <TextBox x:Name="InputTextBox複製__C_1"
-            Margin="303,0,296,315"
-            TextWrapping="Wrap"
-            TextChanged="TextBox_TextChanged" Height="42" VerticalAlignment="Bottom"/>
-        <Button x:Name="NameCheck"
-            Content="確認"
-            Margin="0,0,152,342"
-            FontSize="18"
-            Click="RunBotton_Click" RenderTransformOrigin="0.482,0.54" Height="45" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="112"/>
+        <TextBlock x:Name="Title" Height="60" Margin="19,6,0,0" TextWrapping="Wrap"
+                   Text="乘法表演示" VerticalAlignment="Top" FontSize="48"
+                   Background="#FFFF9900" HorizontalAlignment="Left" Width="245"/>
+        <TextBox x:Name="InputTextBox" Margin="191,136,408,0" TextWrapping="Wrap"
+                 TextChanged="TextBox_TextChanged" Height="42" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="ResultTextBox" TextWrapping="Wrap" AcceptsReturn="True"
+                 IsReadOnly="True" Margin="25,201,25,64" Background="#FFFFEFDE"/>
+        <Button x:Name="RunBotton" Content="執行" Margin="0,140,164,0"
+                FontSize="18" Click="RunBotton_Click" Height="45" VerticalAlignment="Top" HorizontalAlignment="Right" Width="112"/>
+        <TextBox x:Name="NameTextBox" Margin="305,26,294,0" TextWrapping="Wrap" Height="42" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="PhoneTextBox" Margin="303,78,296,0" TextWrapping="Wrap" Height="42" VerticalAlignment="Top" FontSize="16"/>
+        <Button x:Name="NameCheck" Content="確認" Margin="0,48,152,0"
+                FontSize="18" Click="ConfirmButton_Click" Height="45"
+                VerticalAlignment="Top" HorizontalAlignment="Right" Width="112"/>
     </Grid>
 </Window>
