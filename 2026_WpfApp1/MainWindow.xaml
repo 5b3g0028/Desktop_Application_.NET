@@ -6,8 +6,42 @@
         xmlns:local="clr-namespace:_2026_WpfApp1"
         mc:Ignorable="d"
         Title="Awindow" Height="450" Width="800">
-    <Grid>
-        <TextBlock HorizontalAlignment="Left" Height="54" Margin="116,211,0,0" TextWrapping="Wrap" Text="hello world" VerticalAlignment="Top" Width="252"/>
-
+    <Grid Background="#FFFF9D9D">
+        <TextBlock x:Name="Title"
+                   Height="60"
+                   Margin="19,6,0,0"
+                   TextWrapping="Wrap"
+                   Text="乘法表演示"
+                   VerticalAlignment="Top"
+                   FontSize="48" Background="#FFFF9900" HorizontalAlignment="Left" Width="245"/>
+        <TextBox x:Name="InputTextBox"
+                 Margin="191,0,408,257"
+                 TextWrapping="Wrap"
+                 TextChanged="TextBox_TextChanged" Height="42" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="ResultTextBox"
+                 TextWrapping="Wrap"
+                 AcceptsReturn="True"
+                 IsReadOnly="True"
+                 Margin="0,201,0,0"
+                 HorizontalAlignment="Center"
+                 Width="750" Background="#FFFFEFDE" Height="170" VerticalAlignment="Top"/>
+        <Button x:Name="RunBotton"
+                Content="執行"
+                Margin="0,0,178,254"
+                FontSize="18"
+                Click="RunBotton_Click" RenderTransformOrigin="0.482,0.54" Height="45" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="112"/>
+        <TextBox x:Name="InputTextBox複製__C_"
+            Margin="305,0,294,367"
+            TextWrapping="Wrap"
+            TextChanged="TextBox_TextChanged" Height="42" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="InputTextBox複製__C_1"
+            Margin="303,0,296,315"
+            TextWrapping="Wrap"
+            TextChanged="TextBox_TextChanged" Height="42" VerticalAlignment="Bottom"/>
+        <Button x:Name="NameCheck"
+            Content="確認"
+            Margin="0,0,152,342"
+            FontSize="18"
+            Click="RunBotton_Click" RenderTransformOrigin="0.482,0.54" Height="45" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="112"/>
     </Grid>
 </Window>
