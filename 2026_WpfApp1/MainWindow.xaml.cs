@@ -20,14 +20,6 @@ namespace _2026_WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-            TextBlock textBlock = new TextBlock
-            {
-                Text = "Hello World",
-                FontSize = 32,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center
-             };
-            this.Content = textBlock;
         }
     }
 }

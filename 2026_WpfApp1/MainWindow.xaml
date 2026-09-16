@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_2026_WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Awindow" Height="450" Width="800">
     <Grid>
+        <TextBlock HorizontalAlignment="Left" Height="54" Margin="116,211,0,0" TextWrapping="Wrap" Text="hello world" VerticalAlignment="Top" Width="252"/>
 
     </Grid>
 </Window>
