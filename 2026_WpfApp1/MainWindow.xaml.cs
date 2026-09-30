@@ -30,7 +30,7 @@ namespace _2026_WpfApp1
             {
                 var lbl = new Label
                 {
-                    Content = $"{d.Name} ({d.Price} 元)",
+                    Content = $"{d.Name} (${d.Price})",
                     Tag = d,
                     Margin = new Thickness(2),
                     Padding = new Thickness(4),
@@ -44,6 +44,8 @@ namespace _2026_WpfApp1
 
             OrderListBox.ItemsSource = _orderItems;
             OrderListBox.DisplayMemberPath = "Display";
+
+            // 初次更新總計顯示
             UpdateTotal();
         }
 
@@ -101,6 +103,7 @@ namespace _2026_WpfApp1
                 _orderItems.Add(new OrderItem(_selectedDrink, qty));
             }
 
+            // 更新總計與 UI
             UpdateTotal();
         }
 
@@ -114,6 +117,7 @@ namespace _2026_WpfApp1
             }
         }
 
+        // 補回被 XAML 參考的事件處理器：結帳
         private void CheckoutButton_Click(object sender, RoutedEventArgs e)
         {
             int total = _orderItems.Sum(i => i.Subtotal);
@@ -122,10 +126,14 @@ namespace _2026_WpfApp1
             UpdateTotal();
         }
 
+        // 更新總計顯示（確保 TotalTextBlock 在 XAML 有命名）
         private void UpdateTotal()
         {
             int total = _orderItems.Sum(i => i.Subtotal);
-            TotalTextBlock.Text = $"{total} 元";
+            if (TotalTextBlock != null)
+            {
+                TotalTextBlock.Text = $"{total} ";
+            }
         }
 
         // 保留：示範程式動態新增控制項的用法
