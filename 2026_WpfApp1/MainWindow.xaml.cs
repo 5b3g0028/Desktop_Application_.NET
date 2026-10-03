@@ -1,193 +1,99 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
 
 namespace _2026_WpfApp1
 {
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
     public partial class MainWindow : Window
     {
-        private ObservableCollection<OrderItem> _orderItems = new();
-        private ObservableCollection<Drink> _menu = new();
-        private Drink? _selectedDrink;
+        Dictionary<string, int> drinks = new Dictionary<string, int>()
+        {
+            {"紅茶大杯", 60 },
+            {"紅茶小杯", 40 },
+            {"綠茶大杯", 60 },
+            {"綠茶小杯", 40 },
+            {"可樂大杯", 50 },
+            {"可樂小杯", 30 }
+        };
+
+        Dictionary<string, int> orders = new Dictionary<string, int>();
+        string resultMessage = "";
+        string typeMessage = "內用";
 
         public MainWindow()
         {
             InitializeComponent();
+        }
 
-            // 建立菜單（可擴充）
-            _menu.Add(new Drink("紅茶", 30));
-            _menu.Add(new Drink("珍珠奶茶", 60));
-            _menu.Add(new Drink("綠茶", 25));
-            _menu.Add(new Drink("咖啡", 50));
+        private void OrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            orders.Clear();
+            resultMessage = "";
 
-            // 使用 Label 顯示菜單，並綁定事件（不使用 ComboBox）
-            foreach (var d in _menu)
+            double total = 0.0;
+            string discountMessage = "沒有折扣";
+            int index = 1;
+            double sellPrice = 0.0;
+
+            // 檢視飲料選單內，把正確的飲料訂單品項加入orders內
+            for (int i = 0; i < DrinkMenuStackPanel.Children.Count; i++)
             {
-                var lbl = new Label
+                var sp = DrinkMenuStackPanel.Children[i] as StackPanel;
+                var cb = sp.Children[0] as CheckBox;
+                var sl = sp.Children[2] as Slider;
+
+                int quantity = (int)sl.Value;
+                if (cb.IsChecked == true && quantity > 0)
                 {
-                    Content = $"{d.Name} (${d.Price})",
-                    Tag = d,
-                    Margin = new Thickness(2),
-                    Padding = new Thickness(4),
-                    Background = Brushes.Transparent
-                };
-
-                // 點擊時選取（MouseLeftButtonUp）
-                lbl.MouseLeftButtonUp += MenuLabel_MouseLeftButtonUp;
-                MenuPanel.Children.Add(lbl);
+                    string drinkName = cb.Content.ToString();
+                    int price = drinks[drinkName];
+                    orders.Add(drinkName, quantity);
+                }
             }
 
-            OrderListBox.ItemsSource = _orderItems;
-            OrderListBox.DisplayMemberPath = "Display";
-
-            // 初次更新總計顯示
-            UpdateTotal();
-        }
-
-        private void MenuLabel_MouseLeftButtonUp(object? sender, MouseButtonEventArgs e)
-        {
-            var lbl = sender as Label;
-            if (lbl == null) return;
-
-            // 取得對應 Drink（存在 Tag）
-            _selectedDrink = lbl.Tag as Drink;
-
-            // 視覺上標示選取（簡單處理：清除其他背景並標示此項）
-            foreach (var child in MenuPanel.Children.OfType<Label>())
+            // 檢視orders，把所有訂單細項內容計算出細項總和
+            resultMessage += $"訂購方式：{typeMessage}，訂購清單如下：\n";
+            foreach (var item in orders)
             {
-                child.Background = Brushes.Transparent;
-                child.Foreground = Brushes.Black;
+                string drinkName = item.Key;
+                int price = drinks[drinkName];
+                int quantity = item.Value;
+
+                int subTotal = price * quantity;
+                total += subTotal;
+                resultMessage += $"{index}. {drinkName}：{price}元 X {quantity}杯 = {subTotal}元\n";
+                index++;
             }
 
-            lbl.Background = Brushes.Orange;
-            lbl.Foreground = Brushes.White;
-        }
-
-        private void QtyTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var targetTextBox = sender as TextBox;
-            if (targetTextBox == null) return;
-
-            if (!int.TryParse(targetTextBox.Text, out int qty) || qty <= 0)
+            if (total >= 500)
             {
-                targetTextBox.Text = "1";
+                discountMessage = "打8折";
+                sellPrice = total * 0.8;
             }
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            // 改為使用 _selectedDrink（由 Label 選取）
-            if (_selectedDrink == null)
+            else if (total >= 300)
             {
-                MessageBox.Show("請先選擇一項飲料。", "提示", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
+                discountMessage = "打85折";
+                sellPrice = total * 0.85;
             }
-
-            if (!int.TryParse(QtyTextBox.Text, out int qty) || qty <= 0)
+            else if (total >= 200)
             {
-                qty = 1;
-            }
-
-            var existing = _orderItems.FirstOrDefault(i => i.Drink.Name == _selectedDrink.Name);
-            if (existing != null)
-            {
-                existing.Quantity += qty;
+                discountMessage = "打9折";
+                sellPrice = total * 0.9;
             }
             else
             {
-                _orderItems.Add(new OrderItem(_selectedDrink, qty));
+                sellPrice = total;
             }
-
-            // 更新總計與 UI
-            UpdateTotal();
+            resultMessage += $"總價{total}元，{discountMessage}，售價為：{sellPrice}元\n";
+            ResultTextBlock.Text = resultMessage;
         }
 
-        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            var selected = OrderListBox.SelectedItem as OrderItem;
-            if (selected != null)
-            {
-                _orderItems.Remove(selected);
-                UpdateTotal();
-            }
+            var rb = sender as RadioButton;
+            typeMessage = rb.Content.ToString();
         }
-
-        // 補回被 XAML 參考的事件處理器：結帳
-        private void CheckoutButton_Click(object sender, RoutedEventArgs e)
-        {
-            int total = _orderItems.Sum(i => i.Subtotal);
-            MessageBox.Show($"結帳金額：{total} 元", "結帳", MessageBoxButton.OK, MessageBoxImage.Information);
-            _orderItems.Clear();
-            UpdateTotal();
-        }
-
-        // 更新總計顯示（確保 TotalTextBlock 在 XAML 有命名）
-        private void UpdateTotal()
-        {
-            int total = _orderItems.Sum(i => i.Subtotal);
-            if (TotalTextBlock != null)
-            {
-                TotalTextBlock.Text = $"{total} ";
-            }
-        }
-
-        // 保留：示範程式動態新增控制項的用法
-        private void AddTextBlockProgrammatically()
-        {
-            var tb = new TextBlock { Text = "程式新增的文字", Margin = new Thickness(6) };
-            Grid.SetRow(tb, 1);
-            Grid.SetColumn(tb, 1);
-            // MainGrid 若在 XAML 有命名才可用；此方法示範用途
-        }
-    }
-
-    public class Drink
-    {
-        public string Name { get; }
-        public int Price { get; } // 單位：元
-
-        public Drink(string name, int price)
-        {
-            Name = name;
-            Price = price;
-        }
-
-        public override string ToString() => $"{Name} ({Price} 元)";
-    }
-
-    public class OrderItem : INotifyPropertyChanged
-    {
-        public Drink Drink { get; }
-        private int _quantity;
-
-        public int Quantity
-        {
-            get => _quantity;
-            set
-            {
-                if (_quantity == value) return;
-                _quantity = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Quantity)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Subtotal)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Display)));
-            }
-        }
-
-        public int Subtotal => Drink.Price * Quantity;
-
-        public string Display => $"{Drink.Name} x{Quantity} = {Subtotal} 元";
-
-        public OrderItem(Drink drink, int quantity)
-        {
-            Drink = drink;
-            _quantity = quantity;
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }
