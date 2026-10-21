@@ -14,4 +14,8 @@
     <PackageReference Include="Extended.Wpf.Toolkit" Version="5.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Resource Include="Resources\ellipse.jpg" />
+  </ItemGroup>
+
 </Project>
