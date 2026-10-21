@@ -4,63 +4,71 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_2026_WpfApp1"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="WPF飲料訂購ver1" Height="471" Width="832">
-	<Grid Margin="5,5,5,5">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="50"/>
-			<RowDefinition Height="240"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="450"/>
-			<ColumnDefinition MinWidth="100" />
-		</Grid.ColumnDefinitions>
-		<GroupBox Header="內用/外帶">
-			<StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Background="Bisque">
-				<RadioButton x:Name="RadioButton1" Content="內用" Margin="80,0,0,0" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
-				<RadioButton x:Name="RadioButton2" Content="外帶" Margin="80,0,0,0" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
-			</StackPanel>
-		</GroupBox>
-		<StackPanel x:Name="DrinkMenuStackPanel" Orientation="Vertical" Grid.Row="1">
-			<StackPanel Orientation="Horizontal" Height="36" Margin="5,2,5,2" Background="Beige">
-				<CheckBox Content="紅茶大杯" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" FontWeight="Bold" Foreground="Blue"/>
-				<Label Content="60元" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" Foreground="Brown"/>
-				<Slider x:Name="Slider1" Minimum="0" Maximum="20" Width="150" VerticalAlignment="Center" Margin="30,0,0,0" IsSnapToTickEnabled="True"/>
-				<Label Content="{Binding Value, ElementName=Slider1}" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" FontWeight="Bold" />
-			</StackPanel>
-			<StackPanel Orientation="Horizontal" Height="36" Margin="5,2,5,2" Background="Beige">
-				<CheckBox Content="紅茶小杯" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" FontWeight="Bold" Foreground="Blue"/>
-				<Label Content="40元" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" Foreground="Brown"/>
-				<Slider x:Name="Slider2" Minimum="0" Maximum="20" Width="150" VerticalAlignment="Center" Margin="30,0,0,0" IsSnapToTickEnabled="True"/>
-				<Label Content="{Binding Value, ElementName=Slider2}" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" FontWeight="Bold" />
-			</StackPanel>
-			<StackPanel Orientation="Horizontal" Height="36" Margin="5,2,5,2" Background="Beige">
-				<CheckBox Content="綠茶大杯" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" FontWeight="Bold" Foreground="Blue"/>
-				<Label Content="60元" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" Foreground="Brown"/>
-				<Slider x:Name="Slider3" Minimum="0" Maximum="20" Width="150" VerticalAlignment="Center" Margin="30,0,0,0" IsSnapToTickEnabled="True"/>
-				<Label Content="{Binding Value, ElementName=Slider3}" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" FontWeight="Bold" />
-			</StackPanel>
-			<StackPanel Orientation="Horizontal" Height="36" Margin="5,2,5,2" Background="Beige">
-				<CheckBox Content="綠茶小杯" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" FontWeight="Bold" Foreground="Blue"/>
-				<Label Content="40元" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" Foreground="Brown"/>
-				<Slider x:Name="Slider4" Minimum="0" Maximum="20" Width="150" VerticalAlignment="Center" Margin="30,0,0,0" IsSnapToTickEnabled="True"/>
-				<Label Content="{Binding Value, ElementName=Slider4}" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" FontWeight="Bold" />
-			</StackPanel>
-			<StackPanel Orientation="Horizontal" Height="36" Margin="5,2,5,2" Background="Beige">
-				<CheckBox Content="可樂大杯" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" FontWeight="Bold" Foreground="Blue"/>
-				<Label Content="50元" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" Foreground="Brown"/>
-				<Slider x:Name="Slider5" Minimum="0" Maximum="20" Width="150" VerticalAlignment="Center" Margin="30,0,0,0" IsSnapToTickEnabled="True"/>
-				<Label Content="{Binding Value, ElementName=Slider5}" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" FontWeight="Bold" />
-			</StackPanel>
-			<StackPanel Orientation="Horizontal" Height="36" Margin="5,2,5,2" Background="Beige">
-				<CheckBox Content="可樂小杯" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" FontWeight="Bold" Foreground="Blue"/>
-				<Label Content="30元" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" Foreground="Brown"/>
-				<Slider x:Name="Slider6" Minimum="0" Maximum="20" Width="150" VerticalAlignment="Center" Margin="30,0,0,0" IsSnapToTickEnabled="True"/>
-				<Label Content="{Binding Value, ElementName=Slider6}" FontSize="14" VerticalContentAlignment="Center" Margin="20,0,0,0" Height="30" FontWeight="Bold" />
-			</StackPanel>
-		</StackPanel>
-		<TextBlock x:Name="ResultTextBlock"  Grid.Row="2" TextWrapping="Wrap" Background="#FFFBEEE5" Grid.ColumnSpan="3" FontSize="14" Padding="10,10,10,10" Grid.RowSpan="1"/>
-		<Button x:Name="OrderButton" Grid.Column="1" Content="訂購" Grid.Row="1" FontSize="16" Click="OrderButton_Click" MinWidth="50" Margin="34,68,34,135"/>
-	</Grid>
+        Title="Paint App" Height="720" Width="1200">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Height="30">
+            <MenuItem Header="檔案" Height="30" VerticalAlignment="Center" FontSize="16">
+                <MenuItem Header="開啟新畫布" />
+                <MenuItem Header="儲存畫布" />
+            </MenuItem>
+        </Menu>
+
+        <ToolBarTray Height="40" Background="LightCyan" DockPanel.Dock="Top">
+            <ToolBar Height="38" Width="600" Background="#FF96F3F3">
+                <Label Content="筆刷色彩" VerticalContentAlignment="Center" FontSize="16" FontWeight="Bold" Margin="10,0,0,0"/>
+                <xctk:ColorPicker x:Name="StrokeColorPicker" Width="100" Height="30"
+                                  DisplayColorAndName="True"
+                                  SelectedColorChanged="StrokeColorPicker_SelectedColorChanged"/>
+
+                <Label Content="填滿色彩" VerticalContentAlignment="Center" FontSize="16" FontWeight="Bold" Margin="10,0,0,0"/>
+                <xctk:ColorPicker x:Name="FillColorPicker" Width="100" Height="30"
+                                  DisplayColorAndName="True"
+                                  SelectedColorChanged="FillColorPicker_SelectedColorChanged"/>
+
+                <Slider x:Name="ThicknessSlider" Width="120" Minimum="1" Maximum="10"
+                        IsSnapToTickEnabled="True" ValueChanged="ThicknessSlider_ValueChanged"/>
+                <Label Content="{Binding Value, ElementName=ThicknessSlider}" FontSize="14" FontWeight="Bold" Foreground="Red" Margin="10,0,0,0"/>
+            </ToolBar>
+
+            <ToolBar Height="38" Width="600" Background="#FFA8D684">
+                <RadioButton Height="35" Width="35" Tag="Line" ToolTip="直線" Checked="ShapeButton_Checked">
+                    <TextBlock Text="━" FontSize="24" Foreground="DarkGreen"/>
+                </RadioButton>
+                <RadioButton Height="35" Width="35" Tag="Rectangle" ToolTip="矩形" Checked="ShapeButton_Checked">
+                    <TextBlock Text="▭" FontSize="20" Foreground="DarkGreen"/>
+                </RadioButton>
+                <RadioButton Height="35" Width="35" Tag="Ellipse" ToolTip="圓形" Checked="ShapeButton_Checked">
+                    <TextBlock Text="●" FontSize="20" Foreground="DarkGreen"/>
+                </RadioButton>
+                <RadioButton Height="35" Width="35" Tag="Polyline" ToolTip="多邊形" Checked="ShapeButton_Checked">
+                    <TextBlock Text="✎" FontSize="20" Foreground="DarkGreen"/>
+                </RadioButton>
+
+                <Button Content="橡皮擦" Width="70" Click="EraserButton_Click" Background="#FFD9D9D9" Margin="10,0,0,0"/>
+            </ToolBar>
+        </ToolBarTray>
+
+        <StatusBar Height="35" Background="LightGray" DockPanel.Dock="Bottom">
+            <StatusBarItem Width="200">
+                <Label x:Name="StatusLabel" Content="Ready" FontSize="14"/>
+            </StatusBarItem>
+            <Separator/>
+            <StatusBarItem Width="200">
+                <Label x:Name="ShapeLabel" Content="形狀" FontSize="14"/>
+            </StatusBarItem>
+            <Separator/>
+            <StatusBarItem>
+                <Label x:Name="ColorLabel" Content="色彩" FontSize="14"/>
+            </StatusBarItem>
+        </StatusBar>
+
+        <Canvas x:Name="MyCanvas"
+                Background="#FFF5F5E7"
+                MouseLeftButtonDown="MyCanvas_MouseLeftButtonDown"
+                MouseMove="MyCanvas_MouseMove"
+                MouseLeftButtonUp="MyCanvas_MouseLeftButtonUp"
+                MouseEnter="MYcanvas_MouseEnter"/>
+    </DockPanel>
 </Window>
