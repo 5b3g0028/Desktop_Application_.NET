@@ -1,0 +1,53 @@
+﻿<Window x:Class="_2026_WpfApp1.MYdocvier"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_2026_WpfApp1"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="MyDocumentViewer" Height="450" Width="800">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New" Executed="NewCommand_Executed"/>
+        <CommandBinding Command="ApplicationCommands.Open" Executed="OpenCommand_Executed"/>
+        <CommandBinding Command="ApplicationCommands.Save" Executed="SaveCommand_Executed"/>
+    </Window.CommandBindings>
+    <DockPanel>
+        <ToolBarTray Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" DockPanel.Dock="Top" Background="Aqua">
+            <ToolBar x:Name="ApplicationToolbar" Height="40" Width="184" Background="Beige">
+                <Button x:Name="NewButton" Height="38" Width="38" Command="ApplicationCommands.New">
+                    <Image Height="32" Width="32" Source="/new.png"/>
+                </Button>
+                <Button x:Name="OpenButton" Height="38" Width="38" Command="ApplicationCommands.Open">
+                    <Image Height="32" Width="32" Source="/open.png"/>
+                </Button>
+                <Button x:Name="SaveButton" Height="38" Width="38" Command="ApplicationCommands.Save">
+                    <Image Height="32" Width="32" Source="/save.png"/>
+                </Button>
+                <Button x:Name="TrashButton" Height="38" Width="38" >
+                    <Image Height="32" Width="32" Source="/trash.png"/>
+                </Button>
+            </ToolBar>
+            <ToolBar x:Name="EditingToolbar" Height="40" Width="612" Background="#FFEEDDAC">
+                <ToggleButton x:Name="BoldButton" Height="38" Width="38">
+                    <Image Height="32" Width="32" Source="/bold.png" />
+                </ToggleButton>
+                <ToggleButton x:Name="ItalicButton" Height="38" Width="38">
+                    <Image Height="32" Width="32" Source="/italic.png" />
+                </ToggleButton>
+                <ToggleButton x:Name="UnderlineButton" Height="38" Width="38">
+                    <Image Height="32" Width="32" Source="/underline.png" />
+                </ToggleButton>
+                <xctk:ColorPicker x:Name="FontColorPicker" Width="160" Height="38"/>
+                <ComboBox x:Name="FontFamilyComboBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="
+                          150" Height="38" Margin="5,0,0,0"/>
+                <ComboBox x:Name="FontSizeComboBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="
+                          50" Height="38" Margin="5,0,0,0"/>
+            </ToolBar>
+        </ToolBarTray>
+        <StatusBar Height="30" DockPanel.Dock="Bottom" Background="LightGray"/>
+        <RichTextBox x:Name="MainRichTextBox" Background="#FFEFEFEC">
+            <FlowDocument/>
+        </RichTextBox>
+    </DockPanel>
+</Window>
