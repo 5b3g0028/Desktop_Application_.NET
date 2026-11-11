@@ -1,28 +1,10 @@
-# Desktop Application .NET
+# 11/11 小作家
 
-一個用於學習 .NET 視窗應用程式開發的專案。
-
-## 📋 專案介紹
-
-這是一個教學用的 C# 桌面應用程式，用來探索和練習 .NET Framework 或 .NET Core 視窗開發的各種概念和技術。
-
-## 技術棧
-
-- **語言**: C#
-- **框架**: .NET
-- **類型**: 視窗應用程式 (Windows Forms / WPF)
-
-##  快速開始
-
-### 前置需求
-
-- .NET SDK 或 .NET Framework 已安裝
-- Visual Studio 或 Visual Studio Code
-- C# 開發環境
-
-### 安裝和執行
-
-1. 克隆此儲存庫
-   ```bash
-   git clone https://github.com/5b3g0028/Desktop_Application_.NET.git
-   cd Desktop_Application_.NET
+新增 DocumentViewer 視窗，用於文件預覽。
+主視窗新增按鈕，可開啟文件編輯視窗。
+新增 RichTextBox，支援文件內容編輯。
+使用 CommandBinding 實作複製、剪下、貼上等功能。
+新增文字格式工具列，支援粗體、斜體、底線及字體顏色。
+整合 ColorPicker，提供字體顏色選擇。
+新增字型選擇功能。
+新增字體大小調整功能
