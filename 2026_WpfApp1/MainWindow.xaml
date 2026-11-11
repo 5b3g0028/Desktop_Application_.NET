@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:_2026_WpfApp1"
         mc:Ignorable="d"
-        Title="WPF飲料訂購ver1" Height="471" Width="832">
+        Title="WPF小作家" Height="471" Width="832">
 	<Grid Margin="5,5,5,5">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="50"/>
