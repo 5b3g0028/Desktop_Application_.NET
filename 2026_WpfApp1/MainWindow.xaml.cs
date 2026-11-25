@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media.Media3D;
 
 namespace _2026_WpfApp1
 {
@@ -8,92 +10,60 @@ namespace _2026_WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        Dictionary<string, int> drinks = new Dictionary<string, int>()
-        {
-            {"紅茶大杯", 60 },
-            {"紅茶小杯", 40 },
-            {"綠茶大杯", 60 },
-            {"綠茶小杯", 40 },
-            {"可樂大杯", 50 },
-            {"可樂小杯", 30 }
-        };
-
-        Dictionary<string, int> orders = new Dictionary<string, int>();
-        string resultMessage = "";
-        string typeMessage = "內用";
+        List<Student> students = new List<Student>();
+        List<Teacher> teachers = new List<Teacher>();
+        List<Course> courses = new List<Course>();
+        List<Record> records = new List<Record>();
 
         public MainWindow()
         {
             InitializeComponent();
+            InitializeData();
         }
 
-        private void OrderButton_Click(object sender, RoutedEventArgs e)
+        private void InitializeData()
         {
-            orders.Clear();
-            resultMessage = "";
+            // 新增學生資料
+            students.Add(new Student { StudentId = "S001", StudentName = "陳小明" });
+            students.Add(new Student { StudentId = "S002", StudentName = "蔣小安" });
+            students.Add(new Student { StudentId = "S003", StudentName = "沈小洋" });
+            StudentComboBox.ItemsSource = students;
+            StudentComboBox.SelectedIndex = 0;
 
-            double total = 0.0;
-            string discountMessage = "沒有折扣";
-            int index = 1;
-            double sellPrice = 0.0;
+            // 新增教師資料
+            Teacher teacher1 = new Teacher("陳定宏");
+            teacher1.TeachingCourses.Add(new Course { CourseName = "視窗程式設計", OpeningClass = "五專三甲", Point = 2, Tutor = teacher1, Type = "必修" });
+            teacher1.TeachingCourses.Add(new Course { CourseName = "資料結構", OpeningClass = "資工二丙", Point = 3, Tutor = teacher1, Type = "必修" });
+            teacher1.TeachingCourses.Add(new Course { CourseName = "計算機程式", OpeningClass = "資工一丙", Point = 3, Tutor = teacher1, Type = "必修" });
 
-            // 檢視飲料選單內，把正確的飲料訂單品項加入orders內
-            for (int i = 0; i < DrinkMenuStackPanel.Children.Count; i++)
+            Teacher teacher2 = new Teacher("李育強");
+            teacher2.TeachingCourses.Add(new Course { CourseName = "普通數學", OpeningClass = "教育學程", Point = 2, Tutor = teacher2, Type = "必修" });
+            teacher2.TeachingCourses.Add(new Course { CourseName = "微積分", OpeningClass = "資工二甲", Point = 3, Tutor = teacher2, Type = "必修" });
+            teacher2.TeachingCourses.Add(new Course { CourseName = "程式設計", OpeningClass = "資工一甲", Point = 3, Tutor = teacher2, Type = "必修" });
+
+            Teacher teacher3 = new Teacher("林怡君");
+            teacher3.TeachingCourses.Add(new Course { CourseName = "資料庫系統", OpeningClass = "資工三甲", Point = 3, Tutor = teacher3, Type = "必修" });
+            teacher3.TeachingCourses.Add(new Course { CourseName = "作業系統", OpeningClass = "資工三乙", Point = 3, Tutor = teacher3, Type = "必修" });
+            teacher3.TeachingCourses.Add(new Course { CourseName = "人工智慧", OpeningClass = "資工四甲", Point = 3, Tutor = teacher3, Type = "選修" });
+
+            teachers.Add(teacher1);
+            teachers.Add(teacher2);
+            teachers.Add(teacher3);
+
+            // 將所有課程加入 courses 列表
+            foreach (var teacher in teachers)
             {
-                var sp = DrinkMenuStackPanel.Children[i] as StackPanel;
-                var cb = sp.Children[0] as CheckBox;
-                var sl = sp.Children[2] as Slider;
-
-                int quantity = (int)sl.Value;
-                if (cb.IsChecked == true && quantity > 0)
+                foreach (var course in teacher.TeachingCourses)
                 {
-                    string drinkName = cb.Content.ToString();
-                    int price = drinks[drinkName];
-                    orders.Add(drinkName, quantity);
+                    courses.Add(course);
                 }
             }
-
-            // 檢視orders，把所有訂單細項內容計算出細項總和
-            resultMessage += $"訂購方式：{typeMessage}，訂購清單如下：\n";
-            foreach (var item in orders)
-            {
-                string drinkName = item.Key;
-                int price = drinks[drinkName];
-                int quantity = item.Value;
-
-                int subTotal = price * quantity;
-                total += subTotal;
-                resultMessage += $"{index}. {drinkName}：{price}元 X {quantity}杯 = {subTotal}元\n";
-                index++;
-            }
-
-            if (total >= 500)
-            {
-                discountMessage = "打8折";
-                sellPrice = total * 0.8;
-            }
-            else if (total >= 300)
-            {
-                discountMessage = "打85折";
-                sellPrice = total * 0.85;
-            }
-            else if (total >= 200)
-            {
-                discountMessage = "打9折";
-                sellPrice = total * 0.9;
-            }
-            else
-            {
-                sellPrice = total;
-            }
-            resultMessage += $"總價{total}元，{discountMessage}，售價為：{sellPrice}元\n";
-            ResultTextBlock.Text = resultMessage;
+            CourseListBox.ItemsSource = courses;
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        private void StudentComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var rb = sender as RadioButton;
-            typeMessage = rb.Content.ToString();
+            // TODO: 在這裡加入選擇變更時的處理邏輯
         }
     }
 }
